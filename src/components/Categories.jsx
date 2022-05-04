@@ -8,11 +8,11 @@ const Categories = () => {
   const { listOfCategories } = toDoContext;
 
   return (
-    <>
+    <div className="categories-wrapper">
       {listOfCategories.map((category) => (
         <Category key={category.id} category={category} />
       ))}
-    </>
+    </div>
   );
 };
 

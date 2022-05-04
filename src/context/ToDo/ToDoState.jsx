@@ -21,13 +21,11 @@ const ToDoState = ({ children }) => {
         notes: [
           {
             id: 1,
-            title: "Test note 1",
             message: "test message",
             done: false,
           },
           {
             id: 2,
-            title: "Test note 2",
             message: "test message",
             done: false,
           },

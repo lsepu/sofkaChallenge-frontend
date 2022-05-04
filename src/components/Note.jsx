@@ -1,12 +1,16 @@
 import React from "react";
 
 const Note = ({ note }) => {
-  const { title, message } = note;
+  const { message } = note;
 
   return (
-    <div>
-      <h1>{title}</h1>
+    <div className="note">
       <p>{message}</p>
+      <div className="edit-note">
+        <input type="checkbox" name="" id="" />
+        <button className="btn--edit">Edit</button>
+        <button className="btn--delete">Delete</button>
+      </div>
     </div>
   );
 };
