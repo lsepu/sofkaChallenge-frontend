@@ -12,7 +12,10 @@ function reducer(state, action){
     switch(action.type) {
 
         case ADD_CATEGORY:
-            return state;
+            const newCategory = action.payload;
+            const CategoriesWithAddedCategory = [...state.listOfCategories, newCategory];
+            const StateWithNewCategory = {...state, listOfCategories : CategoriesWithAddedCategory};
+            return StateWithNewCategory;
         
         case DELETE_CATEGORY:
             return state;

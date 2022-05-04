@@ -1,13 +1,13 @@
 import Note from "./Note";
 
 const Category = ({ category }) => {
-  const { title, notes } = category;
+  const { name, notes } = category;
 
   return (
     <div className="category-wrapper">
 
       <div className="category-info">
-        <h1>{title}</h1>
+        <h1>{name}</h1>
       </div>
 
       <div className="notes-wrapper">
