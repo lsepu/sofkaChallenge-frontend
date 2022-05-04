@@ -21,7 +21,6 @@ function reducer(state, action){
             return state;
 
         case ADD_NOTE:
-
             const { newNote, categoryId } = action.payload;
 
             let categoriesWithNoteAdded = state.listOfCategories.map(category => {
@@ -41,7 +40,19 @@ function reducer(state, action){
             return state;
 
         case DELETE_NOTE:
-            return state;
+            const { noteId, currentCategoryId } = action.payload;
+
+            let categoriesWithNoteRemoved = state.listOfCategories.map(category => {
+                if(category.id === currentCategoryId ){
+                    const notesUpdated = category.notes.filter(note => note.id !== noteId);
+                    return {...category, notes: notesUpdated};
+                }
+                return category;
+            })
+
+            const stateWithNoteRemoved = {...state, listOfCategories: categoriesWithNoteRemoved};
+
+            return stateWithNoteRemoved;
 
     }
 }

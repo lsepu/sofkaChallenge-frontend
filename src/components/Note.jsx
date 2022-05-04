@@ -1,16 +1,13 @@
 import React from "react";
+import EditNote from "./EditNote";
 
-const Note = ({ note }) => {
-  const { message } = note;
+const Note = ({ note, categoryId }) => {
+  const { message, id } = note;
 
   return (
     <div className="note">
       <p>{message}</p>
-      <div className="edit-note">
-        <input type="checkbox" name="" id="" />
-        <button className="btn--edit">Edit</button>
-        <button className="btn--delete">Delete</button>
-      </div>
+      <EditNote noteId={id} categoryId={categoryId} />
     </div>
   );
 };

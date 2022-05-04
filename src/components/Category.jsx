@@ -14,7 +14,7 @@ const Category = ({ category }) => {
       <div className="notes-wrapper">
         <AddNote categoryId={id}/>
         {notes.map((note) => (
-          <Note key={note.id} note={note} />
+          <Note key={note.id} note={note} categoryId={category.id} />
         ))}
       </div>
     </div>
