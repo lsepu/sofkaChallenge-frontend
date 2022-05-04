@@ -21,7 +21,18 @@ function reducer(state, action){
             return state;
 
         case ADD_NOTE:
-            return state;
+
+            const { newNote, categoryId } = action.payload;
+
+            let categoriesWithNoteAdded = state.listOfCategories.map(category => {
+                if(category.id === categoryId ){
+                    category.notes.push(newNote);
+                }
+                return category;
+            })
+
+            const stateWithNewNote = {...state, listOfCategories: categoriesWithNoteAdded};
+            return stateWithNewNote;
 
         case CHECK_NOTE:
             return state;

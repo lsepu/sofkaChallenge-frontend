@@ -1,7 +1,8 @@
+import AddNote from "./AddNote";
 import Note from "./Note";
 
 const Category = ({ category }) => {
-  const { name, notes } = category;
+  const { id, name, notes } = category;
 
   return (
     <div className="category-wrapper">
@@ -11,13 +12,7 @@ const Category = ({ category }) => {
       </div>
 
       <div className="notes-wrapper">
-        
-        {/* Add a new note or edit current note*/}
-        <div className="inputButton-wrapper">
-          <input type="text" />
-          <button>Create</button>
-        </div>
-
+        <AddNote categoryId={id}/>
         {notes.map((note) => (
           <Note key={note.id} note={note} />
         ))}

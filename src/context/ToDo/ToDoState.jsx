@@ -28,7 +28,7 @@ const ToDoState = ({ children }) => {
             id: 2,
             message: "test message",
             done: false,
-          },
+          }
         ],
       },
 
@@ -37,10 +37,10 @@ const ToDoState = ({ children }) => {
         name: "test category 2",
         notes: [
           {
-            id: 3,
+            id: 4,
             message: "test message",
             done: false,
-          },
+          }
         ],
       },
     ],
@@ -49,17 +49,36 @@ const ToDoState = ({ children }) => {
   //load categories and notes
 
   //add new category
-  const addCategory = (category) => {
+  const addCategory = (categoryName) => {
 
-    const categoryObject = {id: Math.floor(Math.random() * 100), name: category, notes: []};
+    const categoryObject = {
+      id: Math.floor(Math.random() * 100),
+      name: categoryName,
+      notes: [],
+    };
 
     dispatch({
       type: ADD_CATEGORY,
-      payload: categoryObject
-    })
-  }
+      payload: categoryObject,
+    });
+  };
 
   //add note
+
+  const addNote = (noteMessage, categoryId) => {
+    
+    const newNote = {
+      id: Math.floor(Math.random() * 100),
+      message: noteMessage,
+      done: false
+    }
+
+    dispatch({
+      type: ADD_NOTE,
+      payload: {newNote, categoryId}
+    });
+
+  };
 
   //check note
 
@@ -70,7 +89,9 @@ const ToDoState = ({ children }) => {
   const [state, dispatch] = useReducer(ToDoReducer, initialState);
 
   return (
-    <ToDoContext.Provider value={{ listOfCategories: state.listOfCategories, addCategory }}>
+    <ToDoContext.Provider
+      value={{ listOfCategories: state.listOfCategories, addCategory, addNote }}
+    >
       {children}
     </ToDoContext.Provider>
   );
