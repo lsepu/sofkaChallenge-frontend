@@ -14,15 +14,21 @@ import {
 //state handler for all actions related with the to-do
 const ToDoState = ({ children }) => {
   const initialState = {
-    listOfTodos: [
+    listOfCategories: [
       {
         id: 1,
         title: "test category",
         notes: [
           {
             id: 1,
-            title: "asd",
-            message: "test",
+            title: "Test note 1",
+            message: "test message",
+            done: false,
+          },
+          {
+            id: 2,
+            title: "Test note 2",
+            message: "test message",
             done: false,
           },
         ],
@@ -33,14 +39,13 @@ const ToDoState = ({ children }) => {
         title: "test category 2",
         notes: [
           {
-            id: 2,
-            title: "test 2",
+            id: 3,
+            title: "test note 3",
             message: "test message",
             done: false,
           },
         ],
       },
-
     ],
   };
 
@@ -58,7 +63,11 @@ const ToDoState = ({ children }) => {
 
   const [state, dispatch] = useReducer(ToDoReducer, initialState);
 
-  return <ToDoContext.Provider>{children}</ToDoContext.Provider>;
+  return (
+    <ToDoContext.Provider value={{ listOfCategories: state.listOfCategories }}>
+      {children}
+    </ToDoContext.Provider>
+  );
 };
 
 export default ToDoState;

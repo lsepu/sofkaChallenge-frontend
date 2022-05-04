@@ -1,12 +1,14 @@
-import './App.css'
+import "./App.css";
+import Categories from "./components/Categories";
+import ToDoState from "./context/ToDo/ToDoState";
 
 function App() {
-
   return (
-    <div className="App">
+    <ToDoState>
       <h1>Test</h1>
-    </div>
-  )
+      <Categories />
+    </ToDoState>
+  );
 }
 
-export default App
+export default App;
