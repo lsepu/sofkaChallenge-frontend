@@ -52,18 +52,18 @@
   align-items: center;
 }
 
-.edit-note{
+.handle-note{
   padding: 0 0.5rem;
 }
 
-.edit-note input{
+.handle-note input{
   margin: 0 2rem;
   transform : scale(1.5);
 }
 
 
 
-.edit-note button:hover{
+.handle-note button:hover{
   transform: scale(1.1);
 }
 
@@ -107,3 +107,7 @@
   padding-left: 3.3rem;
 }
 
+.disable{
+  pointer-events: none;
+  
+}

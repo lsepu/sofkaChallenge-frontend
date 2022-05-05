@@ -37,7 +37,18 @@ function reducer(state, action){
             return stateWithNewNote;
 
         case CHECK_NOTE:
-            return state;
+            const {NoteCheckedId, categoryNoteId}= action.payload;
+
+            let categoriesWithNoteChecked = state.listOfCategories.map(category => {
+                if(category.id === categoryNoteId){
+                   const notesChecked = category.notes.map(note => note.id === NoteCheckedId ? {...note, done: !note.done} : note);
+                   return {...category, notes: notesChecked};
+                }
+               return category;
+            });
+
+            const stateWithNoteChecked = {...state, listOfCategories: categoriesWithNoteChecked};
+            return stateWithNoteChecked;
 
         case EDIT_NOTE:
             return state;
