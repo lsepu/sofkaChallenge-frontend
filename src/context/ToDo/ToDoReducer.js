@@ -18,7 +18,10 @@ function reducer(state, action){
             return StateWithNewCategory;
         
         case DELETE_CATEGORY:
-            return state;
+            const categoryToDeleteId = action.payload;
+            const categoriesFiltered = state.listOfCategories.filter(category => category.id !== categoryToDeleteId);
+            const stateWithCategoryDeleted = {...state, listOfCategories: categoriesFiltered};
+            return stateWithCategoryDeleted;
 
         case ADD_NOTE:
             const { newNote, categoryId } = action.payload;
@@ -51,7 +54,6 @@ function reducer(state, action){
             })
 
             const stateWithNoteRemoved = {...state, listOfCategories: categoriesWithNoteRemoved};
-
             return stateWithNoteRemoved;
 
     }

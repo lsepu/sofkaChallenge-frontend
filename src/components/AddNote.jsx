@@ -24,7 +24,7 @@ const AddNote = ({ categoryId }) => {
         }}
         type="text"
       />
-      <button onClick={handleNote}>Create</button>
+      <button className="btn-todo" onClick={handleNote}>Create</button>
     </div>
   );
 };

@@ -23,7 +23,7 @@ const AddCategory = () => {
         }}
         type="text"
       />
-      <button onClick={handleCategory}>Add list</button>
+      <button className="btn-todo" onClick={handleCategory}>Add list</button>
     </div>
   );
 };

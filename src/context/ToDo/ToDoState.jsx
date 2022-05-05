@@ -63,9 +63,14 @@ const ToDoState = ({ children }) => {
   };
 
   //delete category
+  const deleteCategory = (categoryToDeleteId) => {
+    dispatch({
+      type: DELETE_CATEGORY,
+      payload: categoryToDeleteId,
+    });
+  };
 
   //add note
-
   const addNote = (noteMessage, categoryId) => {
     const newNote = {
       id: Math.floor(Math.random() * 100),
@@ -84,7 +89,6 @@ const ToDoState = ({ children }) => {
   //edit note
 
   //delete note
-
   const deleteNote = (noteId, currentCategoryId) => {
     dispatch({
       type: DELETE_NOTE,
@@ -96,7 +100,7 @@ const ToDoState = ({ children }) => {
 
   return (
     <ToDoContext.Provider
-      value={{ listOfCategories: state.listOfCategories, addCategory, addNote, deleteNote }}
+      value={{ listOfCategories: state.listOfCategories, addCategory, addNote, deleteNote, deleteCategory }}
     >
       {children}
     </ToDoContext.Provider>

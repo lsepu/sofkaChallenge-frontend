@@ -13,8 +13,8 @@ const EditNote = ({ noteId, categoryId }) => {
   return (
     <div className="edit-note">
       <input type="checkbox" name="" id="" />
-      <button className="btn--edit">Edit</button>
-      <button onClick={onDelete} className="btn--delete">
+      <button className="btn-todo btn--edit">Edit</button>
+      <button onClick={onDelete} className="btn-todo btn--delete">
         Delete
       </button>
     </div>
