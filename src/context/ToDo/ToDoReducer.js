@@ -51,7 +51,18 @@ function reducer(state, action){
             return stateWithNoteChecked;
 
         case EDIT_NOTE:
-            return state;
+            const {noteMessage, noteEditedId, categoryNoteEditedId} = action.payload;
+
+            let categoriesWithNoteEdited = state.listOfCategories.map(category => {
+                if(category.id === categoryNoteEditedId){
+                   const notesEdited = category.notes.map(note => note.id === noteEditedId ? {...note, message: noteMessage} : note);
+                   return {...category, notes: notesEdited};
+                }
+               return category;
+            });
+
+            const stateWithNoteEdited = {...state, listOfCategories: categoriesWithNoteEdited};
+            return stateWithNoteEdited;
 
         case DELETE_NOTE:
             const { noteId, currentCategoryId } = action.payload;

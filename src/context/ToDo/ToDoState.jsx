@@ -93,6 +93,12 @@ const ToDoState = ({ children }) => {
   }
 
   //edit note
+  const editNote = (noteMessage, noteEditedId, categoryNoteEditedId) =>{
+    dispatch({
+      type: EDIT_NOTE,
+      payload: {noteMessage, noteEditedId, categoryNoteEditedId},
+    });
+  }
 
   //delete note
   const deleteNote = (noteId, currentCategoryId) => {
@@ -106,7 +112,7 @@ const ToDoState = ({ children }) => {
 
   return (
     <ToDoContext.Provider
-      value={{ listOfCategories: state.listOfCategories, addCategory, addNote, deleteNote, deleteCategory, checkNote }}
+      value={{ listOfCategories: state.listOfCategories, addCategory, addNote, deleteNote, deleteCategory, checkNote, editNote }}
     >
       {children}
     </ToDoContext.Provider>
