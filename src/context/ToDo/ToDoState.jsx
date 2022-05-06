@@ -23,11 +23,13 @@ const ToDoState = ({ children }) => {
             id: 1,
             message: "test message",
             done: false,
+            fkCategoryId: 1
           },
           {
             id: 2,
             message: "test message",
             done: false,
+            fkCategoryId: 1
           },
         ],
       },
@@ -40,6 +42,7 @@ const ToDoState = ({ children }) => {
             id: 4,
             message: "test message",
             done: false,
+            fkCategoryId: 2
           },
         ],
       },
@@ -71,7 +74,7 @@ const ToDoState = ({ children }) => {
   };
 
   //add note
-  const addNote = (noteMessage, categoryId) => {
+  const addNote = (noteMessage) => {
     const newNote = {
       id: Math.floor(Math.random() * 100),
       message: noteMessage,
@@ -80,31 +83,31 @@ const ToDoState = ({ children }) => {
 
     dispatch({
       type: ADD_NOTE,
-      payload: { newNote, categoryId },
+      payload: newNote,
     });
   };
 
   //check note
-  const checkNote = (NoteCheckedId, categoryNoteId) =>{
+  const checkNote = (NoteChecked) =>{
     dispatch({
       type: CHECK_NOTE,
-      payload: {NoteCheckedId, categoryNoteId},
+      payload: NoteChecked,
     });
   }
 
   //edit note
-  const editNote = (noteMessage, noteEditedId, categoryNoteEditedId) =>{
+  const editNote = (noteEdited) =>{
     dispatch({
       type: EDIT_NOTE,
-      payload: {noteMessage, noteEditedId, categoryNoteEditedId},
+      payload: noteEdited,
     });
   }
 
   //delete note
-  const deleteNote = (noteId, currentCategoryId) => {
+  const deleteNote = (noteDeleted) => {
     dispatch({
       type: DELETE_NOTE,
-      payload: { noteId, currentCategoryId },
+      payload: noteDeleted
     });
   };
 

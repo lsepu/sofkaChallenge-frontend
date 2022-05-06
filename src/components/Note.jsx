@@ -11,7 +11,7 @@ const Note = ({ note, categoryId }) => {
 
   const onDelete = (e) => {
     e.preventDefault();
-    deleteNote(note.id, categoryId);
+    deleteNote(note);
   };
 
   const onCheckBox = (e) => {
@@ -19,12 +19,13 @@ const Note = ({ note, categoryId }) => {
       clearEdit();
     }
     setChecked(e.currentTarget.checked);
-    checkNote(note.id, categoryId);
+    checkNote(note);
   };
 
   const onEdit = (e) => {
     if (message) {
-      editNote(message, note.id, categoryId);
+      const noteEdited = {...note, message: message};
+      editNote(noteEdited);
     }
     clearEdit();
   };
