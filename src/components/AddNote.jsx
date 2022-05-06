@@ -18,6 +18,7 @@ const AddNote = ({ categoryId }) => {
       }
 
       addNote(newNote);
+      setNoteMessage('');
     } else{
       alert("Please write a note message")
     }
@@ -30,6 +31,7 @@ const AddNote = ({ categoryId }) => {
         onChange={(e) => {
           setNoteMessage(e.target.value);
         }}
+        value={noteMessage}
         type="text"
       />
       <button className="btn-todo" onClick={handleNote}>Create</button>

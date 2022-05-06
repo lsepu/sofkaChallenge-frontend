@@ -16,6 +16,7 @@ const AddCategory = () => {
       }
 
       addCategory(newCategory);
+      setCategoryName('');
     } else{
       alert("Please write a list name");
     }
@@ -28,6 +29,7 @@ const AddCategory = () => {
         onChange={(e) => {
           setCategoryName(e.target.value);
         }}
+        value={categoryName}
         type="text"
       />
       <button className="btn-todo" onClick={handleCategory}>Add list</button>
