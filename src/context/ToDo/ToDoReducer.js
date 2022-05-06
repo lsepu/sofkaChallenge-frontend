@@ -4,12 +4,17 @@ import {
     ADD_NOTE,
     CHECK_NOTE,
     EDIT_NOTE,
-    DELETE_NOTE
+    DELETE_NOTE,
+    LOAD_CATEGORIES
 } from '../types'
 
 
 function reducer(state, action){
     switch(action.type) {
+
+        case LOAD_CATEGORIES:
+            const categoriesData = action.payload;
+            return {...state, listOfCategories: categoriesData}
 
         case ADD_CATEGORY:
             const newCategory = action.payload;
@@ -41,7 +46,7 @@ function reducer(state, action){
 
             let categoriesWithNoteChecked = state.listOfCategories.map(category => {
                 if(category.id === noteChecked.fkCategoryId ){
-                   const notesChecked = category.notes.map(note => note.id === noteChecked.id ? {...note, done: !note.done} : note);
+                   const notesChecked = category.notes.map(note => note.id === noteChecked.id ? {...note, done: noteChecked.done} : note);
                    return {...category, notes: notesChecked};
                 }
                return category;

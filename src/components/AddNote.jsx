@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import ToDoContext from "../context/ToDo/ToDoContext";
 
 const AddNote = ({ categoryId }) => {
-  const [note, setNote] = useState("");
+  const [noteMessage, setNoteMessage] = useState("");
 
   const todoContext = useContext(ToDoContext);
 
@@ -10,8 +10,14 @@ const AddNote = ({ categoryId }) => {
 
   const handleNote = (e) => {
     e.preventDefault();
-    if (note) {
-      addNote(note, categoryId);
+    if (noteMessage) {
+
+      const newNote = {
+        message: noteMessage,
+        fkCategoryId: categoryId
+      }
+
+      addNote(newNote);
     }
   };
 
@@ -20,7 +26,7 @@ const AddNote = ({ categoryId }) => {
     <div className="inputButton-wrapper">
       <input
         onChange={(e) => {
-          setNote(e.target.value);
+          setNoteMessage(e.target.value);
         }}
         type="text"
       />

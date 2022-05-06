@@ -5,7 +5,7 @@ const Note = ({ note, categoryId }) => {
   const todoContext = useContext(ToDoContext);
   const { deleteNote, checkNote, editNote } = todoContext;
 
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(note.done);
   const [edit, setEdit] = useState(false);
   const [message, setMessage] = useState("");
 

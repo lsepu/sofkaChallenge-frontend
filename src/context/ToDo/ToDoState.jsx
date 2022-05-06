@@ -1,6 +1,6 @@
 import ToDoContext from "./ToDoContext";
 import ToDoReducer from "./ToDoReducer";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 import {
   ADD_CATEGORY,
@@ -9,94 +9,132 @@ import {
   CHECK_NOTE,
   EDIT_NOTE,
   DELETE_NOTE,
+  LOAD_CATEGORIES
 } from "../types";
 
 //state handler for all actions related with the to-do
 const ToDoState = ({ children }) => {
   const initialState = {
-    listOfCategories: [
-      {
-        id: 1,
-        name: "test category",
-        notes: [
-          {
-            id: 1,
-            message: "test message",
-            done: false,
-            fkCategoryId: 1
-          },
-          {
-            id: 2,
-            message: "test message",
-            done: false,
-            fkCategoryId: 1
-          },
-        ],
-      },
-
-      {
-        id: 2,
-        name: "test category 2",
-        notes: [
-          {
-            id: 4,
-            message: "test message",
-            done: false,
-            fkCategoryId: 2
-          },
-        ],
-      },
-    ],
+    listOfCategories: []
   };
 
+  useEffect(() => {
+    loadCategories();
+  }, [])
+
   //load categories and notes
+  const loadCategories = async() =>{
+    const categories = await fetch('http://localhost:8081/api/v1/get/categories');
+    const categoriesData = await categories.json();
+    dispatch({
+      type: LOAD_CATEGORIES,
+      payload: categoriesData,
+    });
+  }
 
   //add new category
-  const addCategory = (categoryName) => {
-    const categoryObject = {
-      id: Math.floor(Math.random() * 100),
-      name: categoryName,
-      notes: [],
-    };
+  const addCategory = async (categoryName) => {
+    const newCategory = {
+      name : categoryName
+    }
+    const categorySavedPromise = await fetch(
+      `http://localhost:8081/api/v1/create/category`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(newCategory),
+      }
+    );
+
+    const categorySaved = await categorySavedPromise.json();
 
     dispatch({
       type: ADD_CATEGORY,
-      payload: categoryObject,
+      payload: categorySaved,
     });
   };
 
   //delete category
-  const deleteCategory = (categoryToDeleteId) => {
-    dispatch({
-      type: DELETE_CATEGORY,
-      payload: categoryToDeleteId,
-    });
+  const deleteCategory = async (categoryToDeleteId) => {
+
+    let response = await fetch(
+      `http://localhost:8081/api/v1/delete/category/${categoryToDeleteId}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if(response.status === 200){
+      dispatch({
+        type: DELETE_CATEGORY,
+        payload: categoryToDeleteId,
+      });
+    }
   };
 
   //add note
-  const addNote = (noteMessage) => {
-    const newNote = {
-      id: Math.floor(Math.random() * 100),
-      message: noteMessage,
-      done: false,
-    };
+  const addNote = async (newNote) => {
+
+    const noteSavedPromise = await fetch(
+      `http://localhost:8081/api/v1/create/note`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(newNote),
+      }
+    );
+
+    const noteSaved = await noteSavedPromise.json();
 
     dispatch({
       type: ADD_NOTE,
-      payload: newNote,
+      payload: noteSaved,
     });
   };
 
   //check note
-  const checkNote = (NoteChecked) =>{
+  const checkNote = async (note) =>{
+    let noteChecked = {...note, done:!note.done};
+
+    let noteCheckedPromise = await fetch(
+      `http://localhost:8081/api/v1/update/note`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(noteChecked),
+      }
+    );
+
+    noteChecked = await noteCheckedPromise.json();
+
     dispatch({
       type: CHECK_NOTE,
-      payload: NoteChecked,
+      payload: noteChecked,
     });
   }
 
   //edit note
-  const editNote = (noteEdited) =>{
+  const editNote = async (noteEdited) =>{
+
+    let noteEditedPromise = await fetch(
+      `http://localhost:8081/api/v1/update/note`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(noteEdited),
+      }
+    );
+
+    noteEdited= await noteEditedPromise.json();
+
     dispatch({
       type: EDIT_NOTE,
       payload: noteEdited,
@@ -104,11 +142,21 @@ const ToDoState = ({ children }) => {
   }
 
   //delete note
-  const deleteNote = (noteDeleted) => {
-    dispatch({
-      type: DELETE_NOTE,
-      payload: noteDeleted
-    });
+  const deleteNote = async (noteDeleted) => {
+
+    let response = await fetch(
+      `http://localhost:8081/api/v1/delete/note/${noteDeleted.id}`,
+      {
+        method: "DELETE",
+      }
+    );
+
+    if( response.status === 200){
+      dispatch({
+        type: DELETE_NOTE,
+        payload: noteDeleted
+      });
+    }
   };
 
   const [state, dispatch] = useReducer(ToDoReducer, initialState);
