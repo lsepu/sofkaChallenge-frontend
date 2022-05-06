@@ -2,15 +2,22 @@ import React, { useContext, useState } from "react";
 import ToDoContext from "../context/ToDo/ToDoContext";
 
 const AddCategory = () => {
-  const [category, setCategory] = useState("");
+  const [categoryName, setCategoryName] = useState("");
 
   const toDoContext = useContext(ToDoContext);
   const { addCategory } = toDoContext;
 
   const handleCategory = (e) => {
     e.preventDefault();
-    if (category) {
-      addCategory(category);
+    if (categoryName) {
+
+      const newCategory = {
+        name: categoryName
+      }
+
+      addCategory(newCategory);
+    } else{
+      alert("Please write a list name");
     }
   };
 
@@ -19,7 +26,7 @@ const AddCategory = () => {
     <div className="inputButton-wrapper left-align">
       <input
         onChange={(e) => {
-          setCategory(e.target.value);
+          setCategoryName(e.target.value);
         }}
         type="text"
       />

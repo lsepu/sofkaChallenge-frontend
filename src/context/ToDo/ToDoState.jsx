@@ -33,10 +33,8 @@ const ToDoState = ({ children }) => {
   }
 
   //add new category
-  const addCategory = async (categoryName) => {
-    const newCategory = {
-      name : categoryName
-    }
+  const addCategory = async (newCategory) => {
+
     const categorySavedPromise = await fetch(
       `http://localhost:8081/api/v1/create/category`,
       {
@@ -97,8 +95,7 @@ const ToDoState = ({ children }) => {
   };
 
   //check note
-  const checkNote = async (note) =>{
-    let noteChecked = {...note, done:!note.done};
+  const checkNote = async (noteChecked) =>{
 
     let noteCheckedPromise = await fetch(
       `http://localhost:8081/api/v1/update/note`,

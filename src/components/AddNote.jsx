@@ -18,6 +18,8 @@ const AddNote = ({ categoryId }) => {
       }
 
       addNote(newNote);
+    } else{
+      alert("Please write a note message")
     }
   };
 

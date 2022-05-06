@@ -19,7 +19,12 @@ const Note = ({ note, categoryId }) => {
       clearEdit();
     }
     setChecked(e.currentTarget.checked);
-    checkNote(note);
+
+    const noteChecked = {
+      ...note, done: !note.done
+    }
+
+    checkNote(noteChecked);
   };
 
   const onEdit = (e) => {
